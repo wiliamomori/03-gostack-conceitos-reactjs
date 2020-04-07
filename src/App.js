@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import axios from './services/api';
-
 import "./styles.css";
 import api from "./services/api";
 
@@ -10,7 +8,7 @@ function App() {
   const [ repositories, setRepositories ]  = useState([]);
 
   useEffect( () => {
-    axios.get('repositories').then( response => {
+    api.get('repositories').then( response => {
       setRepositories(response.data);
     } );
   },[]);
@@ -21,7 +19,7 @@ function App() {
         title: `Repositório ${Date.now()}`,
       };
 
-      const response = await axios.post('repositories', repository);
+      const response = await api.post('repositories', repository);
       setRepositories([ ...repositories, response.data ]);
     } catch(e){
       alert('Erro ao adicionar um repositório');
